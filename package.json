@@ -1,6 +1,6 @@
 {
   "name": "run-msafat",
-  "version": "2.1.1",
+  "version": "2.3.0",
   "private": true,
   "description": "Arabic race registration website with a JavaScript API and SQLite",
   "engines": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node --env-file-if-exists=.env server/server.cjs",
-    "check": "node --check server/server.cjs && node --check server/auth.cjs && node --check server/features.cjs && node --check server/payments.cjs && node --check server/uploads.cjs && node --check dist/app.js && node --check dist/admin.js && node --check dist/admin-features.js && node --check dist/features-ui.js && node --check dist/volunteer.js && node --check dist/groups.js && node --check dist/race.js && node --check dist/participant.js && node --check dist/i18n.js && node --check dist/motion.js && node --check server/student.cjs && node --check dist/student-policy.js && node --check dist/student-form.js && node --check server/sms.cjs",
+    "check": "node --check server/server.cjs && node --check server/auth.cjs && node --check server/features.cjs && node --check server/payments.cjs && node --check server/uploads.cjs && node --check dist/app.js && node --check dist/admin.js && node --check dist/admin-features.js && node --check dist/features-ui.js && node --check dist/volunteer.js && node --check dist/groups.js && node --check dist/race.js && node --check dist/participant.js && node --check dist/i18n.js && node --check dist/motion.js && node --check server/student.cjs && node --check dist/student-policy.js && node --check dist/student-form.js && node --check server/sms.cjs && node --check dist/batouf-content.js",
     "setup": "node --env-file-if-exists=.env server/setup-admin.cjs"
   },
   "dependencies": {
