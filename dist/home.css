@@ -4,3 +4,5 @@
 
 /* Community film: full frame, quiet presentation, responsive spacing. */
 .home-page .community-feature{max-width:1040px;margin:40px auto;padding:10px;background:#fff;border:1px solid #dce5df;border-radius:22px;box-shadow:0 12px 36px #163c2510;overflow:hidden}.home-page .community-feature video{display:block;width:100%;height:auto;aspect-ratio:848/478;object-fit:contain;background:#142d23;border-radius:14px}.home-page .extra-gallery{gap:20px}.home-page .extra-gallery figure{border-radius:16px;overflow:hidden}@media(max-width:600px){.home-page .community-feature{margin:24px auto;padding:5px;border-radius:15px}.home-page .community-feature video{border-radius:10px}}
+
+.home-page .card-art:has(img[src*="batouf-2026.jpg"]){height:auto;aspect-ratio:1600/902;background:#f5f5ee}.home-page .card-art img[src*="batouf-2026.jpg"]{object-fit:contain}.home-page .card-art:has(img[src*="batouf-2026.jpg"]) .badge,.home-page .card-art:has(img[src*="batouf-2026.jpg"]) .distance-art{display:none}

@@ -10,28 +10,30 @@ const RACE_EVENTS = [
     "registrationProfile": "student",
     "organizer": "جمعية أمانينا والنادي الرياضي",
     "type": "road",
-    "label": "سباق البطوف عرّابة 2026",
+    "label": "خطوة نحو الصحة",
     "distances": [
       "مشاركة مبدئية"
     ],
     "art": "14.11",
-    "description": "سباق البطوف هو سباق جري  بمبادرة مشتركة من جمعية أمانينا ونادي \"الرياضي\"، بالتعاون مع بلدية عرابة، ومخصص لطلاب صفوف الخامس والسادس في مدارس عرابة، وسيقام وسط طبيعة سهل البطوف يوم السبت، 14 تشرين الثاني (نوفمبر).\n\nهذا السباق ليس مجرد حدث رياضي، بل هو محطة لبناء مساحة آمنة، حاضنة، وداعمة لشبابنا والجيل الصاعد. الهدف الأساسي هو تعزيز ثقافة الرياضة، حيث يكون التحدي الحقيقي بين الفرد ونسخته السابقة من نفسه، مع السعي الدائم لتطوير الذات ودعم المجتمع والبيئة المحيطة. نسعى في جمعية أمانينا ونادي \"الرياضي\" لزرع ثقافة إيجابية حاضنة لأبنائنا، ليكونوا في المستقبل الرياديين الذين سيحملون شعلة مجتمعنا!",
+    "description": "سباق البطوف هو سباق جري  بمبادرة مشتركة من جمعية أمانينا ونادي \"الرياضي\"، بالتعاون مع بلدية عرابة – قسم الصحة، ومخصص لطلاب صفوف الخامس والسادس في مدارس عرابة، وسيقام وسط طبيعة سهل البطوف يوم السبت، 14 تشرين الثاني (نوفمبر).\n\nهذا السباق ليس مجرد حدث رياضي، بل هو محطة لبناء مساحة آمنة، حاضنة، وداعمة لشبابنا والجيل الصاعد. الهدف الأساسي هو تعزيز ثقافة الرياضة، حيث يكون التحدي الحقيقي بين الفرد ونسخته السابقة من نفسه، مع السعي الدائم لتطوير الذات ودعم المجتمع والبيئة المحيطة. نسعى في جمعية أمانينا ونادي \"الرياضي\" لزرع ثقافة إيجابية حاضنة لأبنائنا، ليكونوا في المستقبل الرياديين الذين سيحملون شعلة مجتمعنا!",
     "sample": false,
     "images": [
       {
-        "url": "assets/community-1.jpg"
+        "url": "assets/batouf-2026.jpg"
       }
     ],
     "translations": {
       "he": {
         "name": "מרוץ אלבטוף עראבה 2026",
         "location": "מישור אלבטוף",
-        "description": "מרוץ אלבטוף הוא מרוץ ריצה ביוזמה משותפת של עמותת אמאנינא ומועדון אלריאדי, בשיתוף עיריית עראבה. המרוץ מיועד לתלמידי כיתות ה׳–ו׳ בבתי הספר בעראבה ויתקיים בטבע של מישור אלבטוף ביום שבת, 14 בנובמבר 2026.\n\nהמרוץ יוצר מרחב בטוח, מכיל ותומך לדור הצעיר. מטרתו לעודד תרבות ספורט שבה כל משתתף שואף להשתפר ביחס לעצמו, תוך תמיכה בקהילה ובסביבה. עמותת אמאנינא ומועדון אלריאדי מבקשים לטפח תרבות חיובית ומכילה עבור ילדינו, מנהיגי העתיד של הקהילה."
+        "description": "מרוץ אלבטוף הוא מרוץ ריצה ביוזמה משותפת של עמותת אמאנינא ומועדון אלריאדי, בשיתוף עיריית עראבה – מחלקת הבריאות. המרוץ מיועד לתלמידי כיתות ה׳–ו׳ בבתי הספר בעראבה ויתקיים בטבע של מישור אלבטוף ביום שבת, 14 בנובמבר 2026.\n\nהמרוץ יוצר מרחב בטוח, מכיל ותומך לדור הצעיר. מטרתו לעודד תרבות ספורט שבה כל משתתף שואף להשתפר ביחס לעצמו, תוך תמיכה בקהילה ובסביבה. עמותת אמאנינא ומועדון אלריאדי מבקשים לטפח תרבות חיובית ומכילה עבור ילדינו, מנהיגי העתיד של הקהילה.",
+        "label": "צעד לקראת בריאות"
       },
       "en": {
         "name": "Al-Batouf Arraba Race 2026",
         "location": "Al-Batouf Plain",
-        "description": "Al-Batouf Race is a joint initiative by Amanina Association and Al-Riyadi Club, in cooperation with Arraba Municipality. It is for fifth- and sixth-grade students at Arraba schools and takes place in the natural setting of Al-Batouf Plain on Saturday, 14 November 2026.\n\nThe race creates a safe, welcoming and supportive space for the younger generation. It encourages a sporting culture in which each participant strives to improve on their previous self while supporting the community and environment. Amanina Association and Al-Riyadi Club aim to nurture a positive, inclusive culture for our children, the future leaders of our community."
+        "description": "Al-Batouf Race is a joint initiative by Amanina Association and Al-Riyadi Club, in cooperation with Arraba Municipality – Health Department. It is for fifth- and sixth-grade students at Arraba schools and takes place in the natural setting of Al-Batouf Plain on Saturday, 14 November 2026.\n\nThe race creates a safe, welcoming and supportive space for the younger generation. It encourages a sporting culture in which each participant strives to improve on their previous self while supporting the community and environment. Amanina Association and Al-Riyadi Club aim to nurture a positive, inclusive culture for our children, the future leaders of our community.",
+        "label": "A step towards health"
       }
     },
     "registrationRevision": 2,
@@ -86,7 +88,8 @@ const RACE_EVENTS = [
         }
       }
     ],
-    "sponsorRevision": 4
+    "sponsorRevision": 4,
+    "oct20Revision": 1
   }
 ];
 if (typeof module !== "undefined") module.exports = RACE_EVENTS;

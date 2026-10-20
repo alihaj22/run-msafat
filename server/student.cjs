@@ -10,8 +10,10 @@ function validate(b,event){if(event.registrationProfile!=='student')return null;
  const nationalId=clean('nationalId',9,9);if(!/^\d{9}$/.test(nationalId))fail('رقم الهوية يجب أن يتكوّن من 9 أرقام.');
  const guardianPhone=String(b.guardianPhone||'').replace(/[\s()-]/g,'');if(!/^\+[1-9][0-9]{7,14}$/.test(guardianPhone)&&!/^0[1-9][0-9]{7,8}$/.test(guardianPhone))fail('راجع هاتف ولي الأمر.');
  if(!['male','female'].includes(b.gender)||!policy.sizes.includes(b.shirtSize))fail('اختر الجنس ومقاس البلوزة.');
+ if(typeof b.hasAllergies!=='boolean')fail('حدد هل يعاني الطفل من أي حساسية.');
+ const allergyDetails=b.hasAllergies?clean('allergyDetails',2,1000):'';
  if(b.guardianConsent!==true||b.medicalConsent!==true)fail('موافقة ولي الأمر والإقرار الطبي مطلوبان.');
  if(b.policyVersion!==policy.version)fail('حدّث الصفحة واقرأ التصريح الحالي قبل التسجيل.');
- return {name,school,schoolClass,birthYear,nationalId,country,gender:b.gender,guardianName,guardianPhone,shirtSize:b.shirtSize,guardianConsent:true,medicalConsent:true,smsConsent:b.smsConsent===true,policyVersion:policy.version,declarationText:policy.text,policyHash:crypto.createHash('sha256').update(policy.text).digest('hex'),consentAt:new Date().toISOString()};
+ return {hasAllergies:b.hasAllergies,allergyDetails,name,school,schoolClass,birthYear,nationalId,country,gender:b.gender,guardianName,guardianPhone,shirtSize:b.shirtSize,guardianConsent:true,medicalConsent:true,smsConsent:b.smsConsent===true,policyVersion:policy.version,declarationText:policy.text,policyHash:crypto.createHash('sha256').update(policy.text).digest('hex'),consentAt:new Date().toISOString()};
 }
 module.exports={validate,policy};
