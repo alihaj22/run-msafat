@@ -44,7 +44,48 @@ module.exports=function({db,getEvent,getEvents,json,readJSON,allow,locale,sms,wa
   }return false;
  }
  function teams(eventId){return db.prepare("SELECT t.*,COUNT(v.id) AS assigned FROM volunteer_teams t LEFT JOIN volunteers v ON v.team_id=t.id AND v.status IN ('assigned','attended') WHERE t.event_id=? GROUP BY t.id ORDER BY t.start,t.name").all(eventId)}
- async function exportSheet(res,name,columns,rows){const wb=new ExcelJS.Workbook(),sheet=wb.addWorksheet(name);sheet.views=[{state:'frozen',ySplit:1,rightToLeft:res.language!=='en'}];sheet.columns=columns.map(([header,key,width])=>({header:locale.translate(header,res.language),key,width:width||22}));sheet.addRows(rows);sheet.getRow(1).font={bold:true,color:{argb:'FFFFFFFF'}};sheet.getRow(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF163A2A'}};const buffer=await wb.xlsx.writeBuffer();res.writeHead(200,{'Content-Type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','Content-Disposition':'attachment; filename="'+name+'.xlsx"','Cache-Control':'no-store'});res.end(Buffer.from(buffer))}
+ async function exportSheet(res,name,columns,rows){
+  const wb=new ExcelJS.Workbook();
+  const tr=text=>locale.translate(text,res.language);
+  const used=new Set();
+  function sheetName(label){
+   const base=String(label).replace(/[\\/*?:\[\]:\x00-\x1f]/g,' ').replace(/^'+|'+$/g,'').trim().slice(0,31)||'School';
+   let candidate=base,n=2;
+   while(used.has(candidate.toLowerCase())){const suffix=' ('+(n++)+')';candidate=base.slice(0,31-suffix.length)+suffix}
+   used.add(candidate.toLowerCase());return candidate;
+  }
+  function addSheet(label,defs,data){
+   const sheet=wb.addWorksheet(sheetName(label));
+   sheet.views=[{state:'frozen',ySplit:1,rightToLeft:res.language!=='en'}];
+   sheet.columns=defs.map(([header,key,width])=>({header:tr(header),key,width:width||22}));
+   sheet.addRows(data);
+   sheet.getRow(1).font={bold:true,color:{argb:'FFFFFFFF'}};
+   sheet.getRow(1).fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF163A2A'}};
+   sheet.getRow(1).alignment={vertical:'middle',wrapText:true};sheet.getRow(1).height=32;
+   sheet.autoFilter={from:{row:1,column:1},to:{row:Math.max(1,sheet.rowCount),column:defs.length}};
+   return sheet;
+  }
+  if(name==='participants'){
+   const sizes=['14','16','18','S','M','L','XL','2XL'];
+   const unknown='غير محدد';
+   const normalizedSize=value=>{const v=String(value??'').trim().toUpperCase();return sizes.includes(v)?v:unknown};
+   const groups=new Map();
+   for(const row of rows){const school=String(row.school??'').trim()||tr('بدون مدرسة');if(!groups.has(school))groups.set(school,[]);groups.get(school).push(row)}
+   const entries=[...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0],res.language||'ar'));
+   function count(data){const counts=Object.fromEntries([...sizes,unknown].map(size=>[size,0]));for(const row of data)counts[normalizedSize(row.shirtSize)]++;return counts}
+   const totals=count(rows);
+   addSheet('ملخص المقاسات',[['حجم البلوزة','size'],['عدد الطلاب','total']], [...sizes,unknown].map(size=>({size:size===unknown?tr(size):size,total:totals[size]})).concat([{size:tr('المجموع'),total:rows.length}]));
+   const summaryColumns=[['اسم المدرسة','school',32],...sizes.map(size=>[size,size,12]),[unknown,'unknown',18],['المجموع','total',14]];
+   const schoolSummary=entries.map(([school,data])=>{const c=count(data);return {school,...c,unknown:c[unknown],total:data.length}});
+   addSheet('مقاسات حسب المدرسة',summaryColumns,schoolSummary.concat([{school:tr('المجموع'),...totals,unknown:totals[unknown],total:rows.length}]));
+   addSheet('جميع المشاركين',columns,rows);
+   for(const [school,data] of entries)addSheet(school,columns,data);
+  }else addSheet(name,columns,rows);
+  const buffer=await wb.xlsx.writeBuffer();
+  res.writeHead(200,{'Content-Type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','Content-Disposition':'attachment; filename="'+name+'.xlsx"','Cache-Control':'no-store'});
+  res.end(Buffer.from(buffer));
+ }
+
  let exporting=false;
  async function admin(req,res,url){if(!url.pathname.startsWith('/api/admin/'))return false;const eventId=url.searchParams.get('eventId');let m;
   if(req.method==='GET'&&url.pathname==='/api/admin/statistics'){json(res,200,{daily:db.prepare("SELECT substr(created_at,1,10) AS day,COUNT(*) AS total FROM registrations WHERE cancelled=0 AND created_at>=? GROUP BY day ORDER BY day").all(new Date(Date.now()-14*86400000).toISOString()),distances:db.prepare("SELECT distance,COUNT(*) AS total FROM registrations WHERE cancelled=0 GROUP BY distance ORDER BY total DESC").all(),states:db.prepare("SELECT state,COUNT(*) AS total FROM registrations WHERE cancelled=0 GROUP BY state").all(),volunteers:db.prepare('SELECT status,COUNT(*) AS total FROM volunteers GROUP BY status').all()});return true}
